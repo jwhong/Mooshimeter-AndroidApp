@@ -44,6 +44,13 @@ import com.mooshim.mooshimeter.common.*;
 
 import java.util.Calendar;
 
+import java.io.*;
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.*;
+import android.view.View.OnClickListener;
+import android.widget.*;
+
 public class TrendActivity extends Activity {
 
     private static final String TAG="TrendActivity";
@@ -336,6 +343,28 @@ public class TrendActivity extends Activity {
                         public void run() {
                             addDataPoint(new_time,val[0],val[1]);
                             mGraph.forceRefresh(true, false);
+                            /** Data logging hack. */
+                            String textToSaveString = String.valueOf(new_time) + "," + String.valueOf(val[0]) + "," + String.valueOf(val[1]) +'\n';
+                            try {
+                                File myFile = new File("/sdcard/mooshimeter_data.txt");
+                                if(!myFile.exists()) {
+                                    myFile.createNewFile();
+                                }
+                                FileOutputStream fOut = new FileOutputStream(myFile,true);
+                                OutputStreamWriter myOutWriter =
+                                        new OutputStreamWriter(fOut);
+                                myOutWriter.append(textToSaveString);
+                                myOutWriter.close();
+                                fOut.close();
+                                Toast.makeText(getBaseContext(),
+                                        "Done writing SD 'mysdfile.txt'",
+                                        Toast.LENGTH_SHORT).show();
+                            } catch (Exception e) {
+                                Toast.makeText(getBaseContext(), e.getMessage(),
+                                        Toast.LENGTH_SHORT).show();
+                            }
+        
+                            final String FILENAME = "myFile.txt";                            
                         }
                     });
                 }
