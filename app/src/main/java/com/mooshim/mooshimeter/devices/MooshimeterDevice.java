@@ -2,7 +2,8 @@ package com.mooshim.mooshimeter.devices;
 
 import android.util.Log;
 
-import com.mooshim.mooshimeter.common.Beeper;
+import com.mooshim.mooshimeter.common.Alerter;
+import com.mooshim.mooshimeter.common.BroadcastIntentData;
 import com.mooshim.mooshimeter.common.Chooser;
 import com.mooshim.mooshimeter.common.MeterReading;
 import com.mooshim.mooshimeter.interfaces.NotifyHandler;
@@ -219,6 +220,9 @@ public class MooshimeterDevice extends MooshimeterDeviceBase{
             rd.cb.execute(val);
         }
         delegate.onSampleReceived(timestamp_utc, c,reading);
+        if(Util.getPreferenceBoolean(Util.preference_keys.BROADCAST_INTENTS)) {
+            BroadcastIntentData.broadcastMeterReading(reading);
+        }
     }
 
     ////////////////////////////////
@@ -260,9 +264,9 @@ public class MooshimeterDevice extends MooshimeterDeviceBase{
             @Override
             public void execute(float value) {
                 if(value < 0.1) {
-                    Beeper.beep();
+                    Alerter.alert();
                 } else {
-                    Beeper.stopBeeping();
+                    Alerter.stopAlerting();
                 }
             }
         };
@@ -285,9 +289,9 @@ public class MooshimeterDevice extends MooshimeterDeviceBase{
             @Override
             public void execute(float value) {
                 if(value < 0.1) {
-                    Beeper.beep();
+                    Alerter.alert();
                 } else {
-                    Beeper.stopBeeping();
+                    Alerter.stopAlerting();
                 }
             }
         };

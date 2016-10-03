@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mooshim.mooshimeter.R;
+import com.mooshim.mooshimeter.common.BroadcastIntentData;
 import com.mooshim.mooshimeter.common.CooldownTimer;
 import com.mooshim.mooshimeter.common.MeterReading;
 import com.mooshim.mooshimeter.interfaces.MooshimeterControlInterface;
@@ -79,6 +80,7 @@ public class DeviceActivity extends MyActivity implements MooshimeterDelegate {
     // Helpers
     private CooldownTimer autorange_cooldown = new CooldownTimer();
     private SpeaksOnLargeChange speaksOnLargeChange = new SpeaksOnLargeChange();
+    private BroadcastIntentData broadcastIntentData = new BroadcastIntentData(); // added for broadcast intent
 
     private TextView findAndAutofit(int id) {
         TextView rval = (TextView)findViewById(id);
