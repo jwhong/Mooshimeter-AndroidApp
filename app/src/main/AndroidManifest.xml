@@ -50,7 +50,7 @@
             android:name=".activities.GraphingActivity"
             android:parentActivityName=".activities.ScanActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="userLandscape" />
         <activity
             android:name=".activities.OADActivity"
             android:parentActivityName=".activities.ScanActivity"
