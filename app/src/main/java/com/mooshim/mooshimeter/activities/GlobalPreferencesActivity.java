@@ -116,7 +116,7 @@ public class GlobalPreferencesActivity extends MyActivity {
         }
         builder.add("Use Fahrenheit","Display temperatures in F instead of C",makeSwitchForPreference(Util.preference_keys.USE_FAHRENHEIT));
         builder.add("Vibrate","Replace meter beep with vibration",makeSwitchForPreference(Util.preference_keys.VIBRATION_ALERT));
-        builder.add("Boardcast Intents","Broadcasts readings to the Android system so other apps can listen.",makeSwitchForPreference(Util.preference_keys.BROADCAST_INTENTS));
+        builder.add("Broadcast Intents","Broadcasts readings to the Android system so other apps can listen.",makeSwitchForPreference(Util.preference_keys.BROADCAST_INTENTS));
         builder.add("Help","Visit help website",makeButton("Help", new Runnable() {
             @Override
             public void run() {
