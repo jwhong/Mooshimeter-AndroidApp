@@ -83,7 +83,7 @@ public class MeterReading {
 
         final String[] prefixes = new String[]{"n","\u03bc","m","","k","M","G"};
         float lval = value;
-        if(Math.abs(lval) > 1.2*max) {
+        if(Math.abs(lval) > 1.1*max) {
             return "OUT OF RANGE";
         }
         StringBuilder retval = new StringBuilder();
@@ -109,5 +109,15 @@ public class MeterReading {
             rval.units = "W";
         }
         return rval;
+    }
+    public static MeterReading ohmUI(MeterReading m0, MeterReading m1) {//for Ω UI method
+        float res=1e9f;
+        if (m0.value!=0) {res=(m1.value-m0.value*.09029f)//shunt + fuse + wire
+            /m0.value;}
+        return new MeterReading(res ,
+            (m0.n_digits+m1.n_digits)/2,
+            Math.abs(res*2),
+            "Ω"
+        );
     }
 }

@@ -394,6 +394,24 @@ public class MooshimeterDevice extends MooshimeterDeviceBase{
             }
         };
         l.add(mid);
+        mid = new MathInputDescriptor("RESISTANCE (UI METHOD)","Ω") {
+            @Override
+            public void onChosen() {}
+            @Override
+            public boolean meterSettingsAreValid() {
+                InputDescriptor id0 = (InputDescriptor)getSelectedDescriptor(Channel.CH1);
+                InputDescriptor id1 = (InputDescriptor)getSelectedDescriptor(Channel.CH2);
+                boolean valid = true;
+                valid &= id0.units.equals("A");
+                valid &= id1.units.equals("V");
+                return valid;
+            }
+            @Override
+            public MeterReading calculate() {
+                return MeterReading.ohmUI(getValue(Channel.CH1),getValue(Channel.CH2));
+            }
+        };
+        l.add(mid);
         mid = new MathInputDescriptor("THERMOCOUPLE K","C") {
             @Override
             public void onChosen() {
